@@ -1,85 +1,17 @@
 <!-- templates/index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activity Provider - Edum@t</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #1e90ff;
-            color: white;
-            padding: 20px 10px;
-            text-align: center;
-        }
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        p {
-            margin-bottom: 20px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        ul li {
-            margin: 10px 0;
-        }
-        a {
-            text-decoration: none;
-            color: #1e90ff;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #1e90ff;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Edumat Activity Provider</h1>
-    </header>
-    <br>
-    <main>
-        <h2>Activity Provider - Edum@</h2>
-        <p>Abaixo estão os links para os diferentes serviços disponíveis:</p>
-        <ul>
-            <li><a href="/config">1. Página de configuração da atividade</a></li>
-            <li><a href="/json_params">2. Lista de parâmetros</a></li>
-            <li><a href="/user_url?activityID=12345">3. URL de deploy da atividade</a></li>
-            <li><a href="/analytics">4. Analytics de um utilizador da atividade</a></li>
-            <li><a href="/analytics_list">5. Lista de analytics disponíveis na atividade</a></li>
-            <li><a href="/equacoes?activityID=12345">6. Atividade de Equações de 7º Ano</a></li>
-        </ul>
-    </main>
-    <footer>
-        &copy; 2025 Edum@t. Todos os direitos reservados.
-    </footer>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Activity Provider - Edum@t{% endblock %}
+
+{% block content %}
+    <h2>Activity Provider - Edum@t</h2>
+    <p>Abaixo estão os links para os diferentes serviços disponíveis:</p>
+    <ul>
+        <li><a href="/config">1. Página de configuração da atividade</a></li>
+        <li><a href="/json_params">2. Lista de parâmetros</a></li>
+        <li><a href="/user_url?activityID=12345">3. URL de deploy da atividade</a></li>
+        <li><a href="/analytics">4. Analytics de um utilizador da atividade</a></li>
+        <li><a href="/analytics_list">5. Lista de analytics disponíveis na atividade</a></li>
+        <li><a href="/equacoes?activityID=12345">6. Atividade de Equações de 7º Ano</a></li>
+    </ul>
+{% endblock %}
