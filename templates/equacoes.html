@@ -1,73 +1,14 @@
 <!-- templates/equacoes.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atividade de Equações de 7º Ano</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #1e90ff;
-            color: white;
-            padding: 20px 10px;
-            text-align: center;
-        }
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        p {
-            margin-bottom: 20px;
-        }
-        a {
-            text-decoration: none;
-            color: #1e90ff;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #1e90ff;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Atividade de Equações de 7º Ano</h1>
-    </header>
-    <br>
-    <main>
-        <h2>Resumo de Equações de 7º Ano</h2>
-        <p>{{ resumo }}</p>
-        <h2>Resolva as questões de equações de 7º ano:</h2>
-        <p><a href="{{ instrucoes }}" target="_blank">Clique aqui para acessar as questões</a></p>
-        <a href="/">Voltar à Página Inicial</a>
-    </main>
-    <footer>
-        &copy; 2025 Edum@t. Todos os direitos reservados.
-    </footer>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Atividade de Equações de 7º Ano{% endblock %}
+
+{% block header %}Atividade de Equações de 7º Ano{% endblock %}
+
+{% block content %}
+    <h2>Resumo de Equações de 7º Ano</h2>
+    <p>{{ resumo }}</p>
+    <h2>Resolva as questões de equações de 7º ano:</h2>
+    <p><a href="{{ instrucoes }}" target="_blank">Clique aqui para acessar as questões</a></p>
+    <a href="/">Voltar à Página Inicial</a>
+{% endblock %}
