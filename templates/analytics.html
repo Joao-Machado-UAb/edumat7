@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics de Atividade</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Analytics de Atividade</h2>
+    <!-- Iterar sobre os dados de análise fornecidos (analytics_data) -->
+    {% for analytics in analytics_data %}
+        <!-- Mostra ID do aluno para o conjunto de dados atual -->
+        <h2>Aluno ID: {{ analytics.inveniraStdID }}</h2>
+        <!-- Tabela para mostrar os dados qualitativos relacionados ao aluno -->
+        <h3>Qualitativos:</h3>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+            </tr>
+            {% for qual in analytics.qualAnalytics %}
+            <tr>
+                <td>{{ qual.name }}</td>
+                <td>{{ qual.value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+         <!-- Tabela para mostrar os dados quantitativos relacionados ao aluno -->
+        <h3>Quantitativos:</h3>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+            </tr>
+            <!-- Iterar sobre os dados quantitativos do aluno -->
+            {% for quant in analytics.quantAnalytics %}
+            <tr>
+                <td>{{ quant.name }}</td>
+                <td>{{ quant.value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+</body>
+</html>

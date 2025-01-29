@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Lista de Analytics</h1>
+
+    <!-- Dados qualitativos -->
+    <h2>Analytics Qualitativos</h2>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+        </tr>
+        <!-- Percorre a lista 'qualAnalytics' e mostra cada item -->
+        {% for qual in analytics_list.qualAnalytics %}
+        <tr>
+            <td>{{ qual.name }}</td>
+            <td>{{ qual.type }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Dados quantitativos -->
+    <h2>Analytics Quantitativos</h2>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+        </tr>
+        <!-- Percorre a lista 'quantAnalytics' e mostra cada item -->
+        {% for quant in analytics_list.quantAnalytics %}
+        <tr>
+            <td>{{ quant.name }}</td>
+            <td>{{ quant.type }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

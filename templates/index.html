@@ -1,0 +1,31 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Provider - Edum@t</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Edumat Activity Provider</h1>
+    </header>
+    <br>
+    <main>
+        <h2>Activity Provider - Edum@</h2>
+        <p>Abaixo estão os links para os diferentes serviços disponíveis:</p>
+        <ul>
+            <li><a href="/config">1. Página de configuração da atividade</a></li>
+            <li><a href="/json_params">2. Lista de parâmetros</a></li>
+            <li><a href="/user_url?activityID=12345">3. URL de deploy da atividade</a></li>
+            <li><a href="/analytics">4. Analytics de um utilizador da atividade</a></li>
+            <li><a href="/analytics_list">5. Lista de analytics disponíveis na atividade</a></li>
+            <li><a href="/equacoes?activityID=12345">6. Atividade de Equações de 7º Ano</a></li>
+        </ul>
+    </main>
+    <footer>
+        &copy; 2025 Edum@t. Todos os direitos reservados.
+    </footer>
+</body>
+</html>
