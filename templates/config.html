@@ -1,126 +1,37 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuração da Atividade</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #1e90ff;
-            color: white;
-            padding: 20px 10px;
-            text-align: center;
-        }
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        label {
-            font-size: 16px;
-            display: block;
-            margin-bottom: 8px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type="submit"] {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            text-align: center;
-            color: #1e90ff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #1e90ff;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Edumat Activity Provider</h1>
-    </header>
-    
-    <main>
-        <h2>Configuração da Atividade</h2>
+<!-- templates/config.html -->
+{% extends "base.html" %}
 
-        <form>
+{% block title %}Configuração da Atividade{% endblock %}
+
+{% block content %}
+    <h2>Configuração da Atividade</h2>
+    <form>
+        <div class="form-group">
             <label for="resumo">Resumo:</label>
             <input type="text" id="resumo" name="resumo" placeholder="Resumo da atividade">
+        </div>
 
+        <div class="form-group">
             <label for="instrucoes">Instruções (URL):</label>
             <input type="text" id="instrucoes" name="instrucoes" placeholder="URL das instruções">
+        </div>
 
-            <!-- Campos ocultos para enviar os dados ao backend -->
-            <input type="hidden" id="hidden_resumo" name="hidden_resumo">
-            <input type="hidden" id="hidden_instrucoes" name="hidden_instrucoes">
+        <input type="hidden" id="hidden_resumo" name="hidden_resumo">
+        <input type="hidden" id="hidden_instrucoes" name="hidden_instrucoes">
 
-            <input type="submit" value="Salvar Configurações">
-        </form>
+        <input type="submit" value="Salvar Configurações">
+    </form>
 
-        <a href="/">Voltar à Página Inicial</a>
-    </main>
+    <a href="/">Voltar à Página Inicial</a>
+{% endblock %}
 
-    <footer>
-        &copy; 2025 Edum@t. Todos os direitos reservados.
-    </footer>
-
-    <script>
-        // Lógica para atualizar os campos ocultos e mostrar alerta
-        document.querySelector('form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Atualiza os campos ocultos com os valores dos campos de texto
-            document.getElementById('hidden_resumo').value = document.getElementById('resumo').value;
-            document.getElementById('hidden_instrucoes').value = document.getElementById('instrucoes').value;
-
-            // Mostra um alerta de sucesso
-            alert('Configuração salva com sucesso!');
-        });
-    </script>
-</body>
-</html>
+{% block scripts %}
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        document.getElementById('hidden_resumo').value = document.getElementById('resumo').value;
+        document.getElementById('hidden_instrucoes').value = document.getElementById('instrucoes').value;
+        alert('Configuração salva com sucesso!');
+    });
+</script>
+{% endblock %}
