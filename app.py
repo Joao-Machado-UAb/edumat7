@@ -23,12 +23,10 @@ def config():
 # parametros json
 @app.route("/json_params", methods=["GET"])
 def json_params():
-    return jsonify(
-        [
-            {"name": "resumo", "type": "text/plain"},
-            {"name": "instrucoes", "type": "text/plain"},
-        ]
-    )
+    return jsonify([
+        {"name": "resumo", "type": "text/plain"},
+        {"name": "instrucoes", "type": "text/plain"},
+    ])
 
 
 # Lista de analytics da atividade
@@ -55,11 +53,9 @@ def deploy():
     resumo = json_params.get("resumo", "")
     instrucoes = json_params.get("instrucoes", "")
     activity_facade.update_activity(activity_id, resumo, instrucoes)
-    return jsonify(
-        {
-            "url": f"https://edumat.onrender.com/atividade?id={activity_id}&student_id={student_id}"
-        }
-    )
+    return jsonify({
+        "url": f"https://edumat.onrender.com/atividade?id={activity_id}&student_id={student_id}"
+    })
 
 
 @app.route("/analytics", methods=["GET"])
