@@ -1,43 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics de Atividade</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table th, table td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
-        table th {
-            background-color: #f4f4f4;
-        }
-        h1, h2 {
-            color: #1e90ff;
-        }
-    </style>
-</head>
-<body>
-    <h1>Analytics de Atividade</h1>
-    <!-- Iterar sobre os dados de análise fornecidos (analytics_data) -->
+<!-- templates/analytics.html -->
+{% extends "base.html" %}
+
+{% block title %}Analytics de Atividade{% endblock %}
+
+{% block header %}Analytics de Atividade{% endblock %}
+
+{% block content %}
     {% for analytics in analytics_data %}
-        <!-- Mostra ID do aluno para o conjunto de dados atual -->
         <h2>Aluno ID: {{ analytics.inveniraStdID }}</h2>
-        <!-- Tabela para mostrar os dados qualitativos relacionados ao aluno -->
+        
         <h3>Qualitativos:</h3>
         <table>
             <tr>
@@ -51,14 +22,13 @@
             </tr>
             {% endfor %}
         </table>
-         <!-- Tabela para mostrar os dados quantitativos relacionados ao aluno -->
+
         <h3>Quantitativos:</h3>
         <table>
             <tr>
                 <th>Nome</th>
                 <th>Valor</th>
             </tr>
-            <!-- Iterar sobre os dados quantitativos do aluno -->
             {% for quant in analytics.quantAnalytics %}
             <tr>
                 <td>{{ quant.name }}</td>
@@ -67,5 +37,4 @@
             {% endfor %}
         </table>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
