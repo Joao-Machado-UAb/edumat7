@@ -1,7 +1,7 @@
 # activity_manager.py
 
 from singleton_db import SingletonDB
-from observers import (
+from observer import (
     ActivityAnalytics,
     QualitativeAnalyticsObserver,
     QuantitativeAnalyticsObserver,
