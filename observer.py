@@ -19,7 +19,6 @@ class AnalyticsObserver(ABC):
         pass
 
     def _save_to_json(self, filename: str, data: Dict[str, Any]) -> None:
-        """Método auxiliar para guardar dados em arquivo JSON"""
         os.makedirs("analytics_data", exist_ok=True)
         filepath = f"analytics_data/{filename}"
 
@@ -78,26 +77,22 @@ class QuantitativeAnalyticsObserver(AnalyticsObserver):
 # Subject (Observable)
 class ActivityAnalytics:
     def __init__(self):
-        self._observer: List[AnalyticsObserver] = []
+        self._observers: List[AnalyticsObserver] = []
 
     def attach(self, observer: AnalyticsObserver) -> None:
-        """Adiciona um novo observer"""
-        if observer not in self._observer:
-            self._observer.append(observer)
+        if observer not in self._observers:
+            self._observers.append(observer)
 
     def detach(self, observer: AnalyticsObserver) -> None:
-        """Remove um observer"""
-        self._observer.remove(observer)
+        self._observers.remove(observer)
 
     def notify(self, activity_id: str, student_id: str, data: Dict[str, Any]) -> None:
-        """Notifica todos os observers"""
-        for observer in self._observer:
+        for observer in self._observers:
             observer.update(activity_id, student_id, data)
 
     def record_activity(
         self, activity_id: str, student_id: str, data: Dict[str, Any]
     ) -> None:
-        """Registra uma atividade e notifica os observers"""
         print(
             f"Registrando atividade para estudante {student_id} na atividade {activity_id}"
         )
