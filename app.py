@@ -1,12 +1,11 @@
 # app.py
-
 from flask import Flask, jsonify, request, render_template
-from activity_facade import ActivityFacade
+from activity_manager import ActivityManager
 
 app = Flask(__name__)
-
 # Instância única do ActivityFacade
-activity_facade = ActivityFacade()
+activity_manager = ActivityManager()
+
 
 # Página de inicial
 @app.route("/")
@@ -23,23 +22,25 @@ def config():
 # parametros json
 @app.route("/json_params", methods=["GET"])
 def json_params():
-    return jsonify([
-        {"name": "resumo", "type": "text/plain"},
-        {"name": "instrucoes", "type": "text/plain"},
-    ])
+    return jsonify(
+        [
+            {"name": "resumo", "type": "text/plain"},
+            {"name": "instrucoes", "type": "text/plain"},
+        ]
+    )
 
 
 # Lista de analytics da atividade
 @app.route("/analytics_list", methods=["GET"])
 def analytics_list():
-    return jsonify(activity_facade.get_analytics_list())
+    return jsonify(activity_manager.get_analytics_config())
 
 
 # Deploy da atividade - Primeira Etapa
 @app.route("/user_url", methods=["GET"])
 def user_url():
     activity_id = request.args.get("activityID")
-    activity_facade.create_activity(activity_id)
+    activity_manager.create_activity(activity_id)
     return jsonify({"url": f"https://edumat.onrender.com/atividade?id={activity_id}"})
 
 
@@ -49,18 +50,23 @@ def deploy():
     data = request.get_json()
     activity_id = data.get("activityID")
     student_id = data.get("Inven!RAstdID")
-    json_params = data.get("json_params")
-    resumo = json_params.get("resumo", "")
-    instrucoes = json_params.get("instrucoes", "")
-    activity_facade.update_activity(activity_id, resumo, instrucoes)
-    return jsonify({
-        "url": f"https://edumat.onrender.com/atividade?id={activity_id}&student_id={student_id}"
-    })
+    json_params = data.get("json_params", {})
+
+    activity_manager.update_activity(
+        activity_id, json_params.get("resumo"), json_params.get("instrucoes")
+    )
+
+    return jsonify(
+        {
+            "url": f"https://edumat.onrender.com/atividade?id={activity_id}&student_id={student_id}"
+        }
+    )
 
 
+# analytics da atividade
 @app.route("/analytics", methods=["GET"])
 def analytics():
-    analytics_data = activity_facade.get_analytics_data()
+    analytics_data = activity_manager.get_analytics_data()
     return render_template("analytics.html", analytics_data=analytics_data)
 
 
@@ -68,14 +74,19 @@ def analytics():
 @app.route("/equacoes", methods=["GET"])
 def equacoes():
     activity_id = request.args.get("activityID")
-    data = activity_facade.access_activity_data(activity_id)
-    if data:
-        resumo = data.get("resumo", "")
-        instrucoes = data.get("instrucoes", "")
-    else:
-        resumo = "Resumo de equações de 7º ano: Aqui você pode encontrar um resumo das equações de 7º ano."
-        instrucoes = "https://www.matematica.pt/aulas-exercicios.php?id=190"
-    return render_template("equacoes.html", resumo=resumo, instrucoes=instrucoes)
+    student_id = request.args.get("student_id")
+
+    data = activity_manager.get_activity(activity_id, student_id)
+
+    if not data:
+        data = {
+            "resumo": "Resumo de equações de 7º ano: Aqui você pode encontrar um resumo das equações de 7º ano.",
+            "instrucoes": "https://www.matematica.pt/aulas-exercicios.php?id=190",
+        }
+
+    return render_template(
+        "equacoes.html", resumo=data["resumo"], instrucoes=data["instrucoes"]
+    )
 
 
 if __name__ == "__main__":
